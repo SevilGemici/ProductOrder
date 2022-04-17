@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ProductOrder.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Passbook</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        <a asp-action="AddOrEdit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-plus"></i> New
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            <form asp-action="Delete" asp-route-id="@item.OrderId">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="AddOrEdit" asp-route-id="@item.OrderId" class="btn btn-warning">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure to delete this record?')">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
